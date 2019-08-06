@@ -1,0 +1,9 @@
+<div>
+  <button (click)="viewAll()">view all games</button>
+  <button (click)="clear()">clear</button>
+
+  <p *ngFor="let game of games">
+    {{ game.gameNumber }}) {{ game.playerOne }}:{{ game.scoreOne }} vs {{ game.playerTwo }}:{{ game.scoreTwo }}
+  </p>
+
+</div>
