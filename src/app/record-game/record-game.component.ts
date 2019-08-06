@@ -15,9 +15,13 @@ export class RecordGameComponent implements OnInit {
   }
 
   record(playerOne, playerTwo, scoreOne, scoreTwo) {
-    fetch('https://catalyte-pong.herokuapp.com/games/add' +
-      `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}`,
-      {mode: 'cors'}).then(res => res.text()).then(result => this.text = result);
+    if ((!scoreOne && scoreOne !== 0) || (!scoreTwo && scoreTwo !== 0)) {
+      this.text = 'Please enter vail scores';
+    } else {
+      fetch('https://catalyte-pong.herokuapp.com/games/add' +
+        `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}`,
+        {mode: 'cors'}).then(res => res.text()).then(result => this.text = result);
+    }
   }
 
   getNames() {
