@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ping-pong-client';
+  text = 'Please wait for the API to boot';
+
+  constructor() {
+    fetch(`https://catalyte-pong.herokuapp.com/players/test`, {mode: 'cors'})
+      .then(res => res.text()).then(result => this.text = result);
+  }
 }

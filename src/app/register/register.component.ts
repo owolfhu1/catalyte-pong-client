@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register(value) {
-    console.log('registering', value);
     fetch(`https://catalyte-pong.herokuapp.com/players/register?username=${value}`, {mode: 'cors'})
       .then(res => res.text()).then(result => this.text = result);
   }
