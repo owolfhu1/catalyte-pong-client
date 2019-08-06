@@ -7,16 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecordGameComponent implements OnInit {
   text = 'record a game here';
-
+  names = [];
   constructor() { }
 
   ngOnInit() {
+    this.getNames();
   }
 
   record(playerOne, playerTwo, scoreOne, scoreTwo) {
     fetch('https://catalyte-pong.herokuapp.com/games/add' +
       `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}`,
       {mode: 'cors'}).then(res => res.text()).then(result => this.text = result);
+  }
+
+  getNames() {
+    fetch('https://catalyte-pong.herokuapp.com/players/list', {mode: 'cors'}).then(res => res.json())
+      .then(result => this.names = result);
   }
 
 }
