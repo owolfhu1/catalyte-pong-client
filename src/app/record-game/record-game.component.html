@@ -1,6 +1,6 @@
 <div>
   {{ text }} <br>
-  <button (click)="getNames()">update dropdown</button>
+  <button (click)="getNames()">update dropdown</button><br>
   player one: <br>
   name: <select #playerOne>
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>
