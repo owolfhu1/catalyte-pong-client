@@ -7,13 +7,16 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 })
 export class RecordGameComponent implements OnInit {
   text = 'record a game here';
-  names = [];
+  names;
   @ViewChild('scoreOne') scoreOne: ElementRef;
   @ViewChild('scoreTwo') scoreTwo: ElementRef;
+  @ViewChild('playerOne') playerOne: ElementRef;
+  @ViewChild('playerTwo') playerTwo: ElementRef;
   constructor() { }
 
   ngOnInit() {
     this.getNames();
+    setTimeout(() => this.getNames(), 50);
   }
 
   record(playerOne, playerTwo, scoreOne, scoreTwo) {
@@ -30,7 +33,11 @@ export class RecordGameComponent implements OnInit {
 
   getNames() {
     fetch('https://catalyte-pong.herokuapp.com/players/list', {mode: 'cors'}).then(res => res.json())
-      .then(result => this.names = result);
+      .then(result => {
+        this.names = result;
+        this.playerOne.nativeElement.value = null;
+        this.playerTwo.nativeElement.value = null;
+      });
   }
 
 }
