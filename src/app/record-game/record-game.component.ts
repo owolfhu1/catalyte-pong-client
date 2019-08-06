@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-record-game',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class RecordGameComponent implements OnInit {
   text = 'record a game here';
   names = [];
+  @ViewChild('scoreOne') scoreOne: ElementRef;
+  @ViewChild('scoreTwo') scoreTwo: ElementRef;
   constructor() { }
 
   ngOnInit() {
@@ -21,6 +23,8 @@ export class RecordGameComponent implements OnInit {
       fetch('https://catalyte-pong.herokuapp.com/games/add' +
         `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}`,
         {mode: 'cors'}).then(res => res.text()).then(result => this.text = result);
+      this.scoreOne.nativeElement.value = null;
+      this.scoreTwo.nativeElement.value = null;
     }
   }
 
