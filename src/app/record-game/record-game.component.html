@@ -1,0 +1,10 @@
+<div>
+  {{ text }} <br>
+  player one: <br>
+  name: <input type="text" #playerOne> <br>
+  score: <input type="number" #scoreOne> <br>
+  player two: <br>
+  name: <input type="text" #playerTwo> <br>
+  score: <input type="number" #scoreTwo> <br>
+  <button (click)="record(playerOne.value, playerTwo.value, scoreOne.value, scoreTwo.value)">record</button>
+</div>
