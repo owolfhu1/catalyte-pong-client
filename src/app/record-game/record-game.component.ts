@@ -20,3 +20,13 @@ export class RecordGameComponent implements OnInit {
   }
 
 }
+
+/* putting this here️ meh
+  ng build --prod --output-path docs --base-href catalyte-pong-client
+
+  When the build is complete, make a copy of docs/index.html and name it docs/404.html.
+
+  Commit your changes and push.
+
+  deployed page at https://owolfhu1.github.io/catalyte-pong-client/.
+*/
