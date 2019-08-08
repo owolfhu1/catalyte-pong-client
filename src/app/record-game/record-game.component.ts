@@ -22,6 +22,7 @@ export class RecordGameComponent implements OnInit {
   record(playerOne, playerTwo, scoreOne, scoreTwo) {
     if ((!scoreOne && scoreOne !== 0) || (!scoreTwo && scoreTwo !== 0)) {
       this.text = 'Please enter valid scores';
+      setTimeout(() => this.text = 'record a game here', 3000);
     } else {
       fetch('https://catalyte-pong.herokuapp.com/games/add' +
         `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}`,
