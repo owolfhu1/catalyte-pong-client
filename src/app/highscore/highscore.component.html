@@ -1,0 +1,16 @@
+<div>
+  <h3>high scores <button (click)="fetchScores()">refresh</button></h3>
+
+  <table>
+    <tr>
+      <th>rank</th>
+      <th>name</th>
+      <th>rating</th>
+    </tr>
+    <tr *ngFor="let player of players; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ player.username }}</td>
+      <td>{{ format(player.rating) }}</td>
+    </tr>
+  </table>
+</div>

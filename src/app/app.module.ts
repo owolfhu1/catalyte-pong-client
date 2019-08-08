@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { RecordGameComponent } from './record-game/record-game.component';
 import { RecordViewerComponent } from './record-viewer/record-viewer.component';
+import { HighscoreComponent } from './highscore/highscore.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RecordGameComponent,
-    RecordViewerComponent
+    RecordViewerComponent,
+    HighscoreComponent
   ],
   imports: [
     BrowserModule
