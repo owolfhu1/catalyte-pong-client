@@ -7,17 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HighscoreComponent implements OnInit {
 
-  players: { id: string, rating: number, username: string }[] = [];
+  players: { id: string, rating: number, username: string , wins: number, losses: number}[] = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.fetchScores();
+    this.fetchScores('rating');
   }
 
-  fetchScores() {
+  fetchScores(type) {
     this.players = [];
-    fetch('https://catalyte-pong.herokuapp.com/players/scores', {mode: 'cors'}).then(res => res.json())
+    fetch('https://catalyte-pong.herokuapp.com/players/scores?type=' + type, {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.players = result;
       });

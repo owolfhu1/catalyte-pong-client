@@ -16,9 +16,17 @@
   <br>
 
 
+  <table *ngIf="games?.length > 0">
+    <tr *ngFor="let game of games">
+      <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
+        {{ game.playerOne }}<br>{{ game.scoreOne }}
+      </td>
+      <td>vs</td>
+      <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
+        {{ game.playerTwo }}<br>{{ game.scoreTwo }}
+      </td>
+    </tr>
+  </table>
 
-  <p *ngFor="let game of games">
-    {{ game.gameNumber }}) {{ game.playerOne }}:{{ game.scoreOne }} vs {{ game.playerTwo }}:{{ game.scoreTwo }}
-  </p>
 
 </div>
