@@ -1,4 +1,6 @@
 <div>
+  <h1>Games</h1>
+
   <button (click)="viewAll()">view all games</button><button (click)="clear()">clear</button><br>
   <select #player>
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>

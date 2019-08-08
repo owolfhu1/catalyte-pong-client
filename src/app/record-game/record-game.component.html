@@ -1,15 +1,22 @@
 <div>
-  <h3>{{ text }}</h3>
-  <button (click)="getNames()">update dropdown</button><br>
-  player one: <br>
-  name: <select #playerOne>
-    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
-  </select><br>
-  score: <input type="number" min="0" #scoreOne><br>
-  player two: <br>
-  name: <select #playerTwo>
-    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
-  </select><br>
-  score: <input type="number" min="0" #scoreTwo> <br>
-  <button (click)="record(playerOne.value, playerTwo.value, scoreOne.value, scoreTwo.value)">record</button>
+  <h1>{{ text }} <button (click)="record(playerOne.value, playerTwo.value, scoreOne.value, scoreTwo.value)">record</button></h1>
+  <table>
+    <tr>
+      <td>
+        <select #playerOne>
+          <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+        </select>
+        <br>
+        <input type="number" min="0" #scoreOne>
+      </td>
+      <td>vs</td>
+      <td>
+        <select #playerTwo>
+          <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+        </select>
+        <br>
+        <input type="number" min="0" #scoreTwo>
+      </td>
+    </tr>
+  </table>
 </div>
