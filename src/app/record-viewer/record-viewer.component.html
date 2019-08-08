@@ -1,6 +1,21 @@
 <div>
-  <button (click)="viewAll()">view all games</button>
-  <button (click)="clear()">clear</button>
+  <button (click)="viewAll()">view all games</button><button (click)="clear()">clear</button><br>
+  <select #player>
+    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+  </select>
+  <button (click)="lookupPlayer(player.value)">'s games</button>
+  <br>
+  <select #playerOne>
+    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+  </select>
+  vs
+  <select #playerTwo>
+    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+  </select>
+  <button (click)="lookupPlayers(playerOne.value, playerTwo.value)">lookup</button>
+  <br>
+
+
 
   <p *ngFor="let game of games">
     {{ game.gameNumber }}) {{ game.playerOne }}:{{ game.scoreOne }} vs {{ game.playerTwo }}:{{ game.scoreTwo }}
