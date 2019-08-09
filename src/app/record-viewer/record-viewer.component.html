@@ -27,8 +27,35 @@
       <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
         {{ game.playerTwo }}<br>{{ game.scoreTwo }}
       </td>
+      <td>
+        <button (click)="edit(game)">edit</button>
+      </td>
     </tr>
   </table>
 
-
 </div>
+
+<form [ngClass]="{'hide': hide}">
+  <h1 *ngIf="editing"> editing game #{{ editing.gameNumber }}</h1>
+  <table class="pad">
+    <tr>
+      <td>
+        <select #player1>
+          <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+        </select>
+        <br>
+        <input type="number" min="0" #score1>
+      </td>
+      <td>vs</td>
+      <td>
+        <select #player2>
+          <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+        </select>
+        <br>
+        <input type="number" min="0" #score2>
+      </td>
+    </tr>
+  </table>
+  <button type="button" (click)="save(player1.value, player2.value, score1.value, score2.value)">save game</button>
+  <button type="button" (click)="hideMe()">close</button>
+</form>

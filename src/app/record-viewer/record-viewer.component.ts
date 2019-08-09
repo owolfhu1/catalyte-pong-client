@@ -10,7 +10,13 @@ export class RecordViewerComponent implements OnInit {
   @ViewChild('player') player: ElementRef;
   @ViewChild('playerOne') playerOne: ElementRef;
   @ViewChild('playerTwo') playerTwo: ElementRef;
+  @ViewChild('player1') player1: ElementRef;
+  @ViewChild('player2') player2: ElementRef;
+  @ViewChild('score1') score1: ElementRef;
+  @ViewChild('score2') score2: ElementRef;
   names;
+  hide = true;
+  editing;
 
   constructor() { }
 
@@ -57,5 +63,37 @@ export class RecordViewerComponent implements OnInit {
           this.games = result;
         });
     }
+  }
+
+  edit(game) {
+    this.hide = false;
+    this.editing = game;
+    this.score1.nativeElement.value = game.scoreOne;
+    this.score2.nativeElement.value = game.scoreTwo;
+    this.player1.nativeElement.value = game.playerOne;
+    this.player2.nativeElement.value = game.playerTwo;
+  }
+
+  save(player1, player2, score1, score2) {
+    if (
+      player1 !== player2 &&
+      this.editing.playerOne !== player1 ||
+      this.editing.playerTwo !== player2 ||
+      this.editing.scoreOne !== score1 ||
+      this.editing.scoreTwo !== score2
+    ) {
+      this.hide = true;
+      this.editing.playerOne = player1;
+      this.editing.playerTwo = player2;
+      this.editing.scoreOne = score1;
+      this.editing.scoreTwo = score2;
+      fetch(`https://catalyte-pong.herokuapp.com/games/update?playerOne=${player1}&playerTwo=${player2
+      }&scoreOne=${score1}&scoreTwo=${score2}&gameNumber=${this.editing.gameNumber}`, {mode: 'cors'})
+        .then(res => res.text()).then(console.log);
+    }
+  }
+
+  hideMe() {
+    this.hide = true;
   }
 }

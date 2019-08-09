@@ -3,6 +3,24 @@ table, th, td {
   padding: 4px;
   border-radius: 3px;
 }
+
 .win {
   background-color: lightgreen;
+}
+
+.hide {
+  display: none;
+}
+
+form {
+  z-index: 100;
+  width: 350px;
+  height: 200px;
+  border: black solid 2px;
+  background-color: lightsalmon;
+  position: fixed;
+  top: 100px;
+  left: 30px;
+  border-radius: 10px;
+  padding: 20px;
 }
