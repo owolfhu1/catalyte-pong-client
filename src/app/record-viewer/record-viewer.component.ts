@@ -6,7 +6,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
   styleUrls: ['./record-viewer.component.css']
 })
 export class RecordViewerComponent implements OnInit {
-  games: { gameNumber: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[] = [];
+  games: { gameNumber: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
   @ViewChild('player') player: ElementRef;
   @ViewChild('playerOne') playerOne: ElementRef;
   @ViewChild('playerTwo') playerTwo: ElementRef;
@@ -15,8 +15,10 @@ export class RecordViewerComponent implements OnInit {
   @ViewChild('score1') score1: ElementRef;
   @ViewChild('score2') score2: ElementRef;
   names;
-  hide = true;
+  hideEdit = true;
+  hideHistory = true;
   editing;
+  history: { gameNumber: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
 
   constructor() { }
 
@@ -66,7 +68,7 @@ export class RecordViewerComponent implements OnInit {
   }
 
   edit(game) {
-    this.hide = false;
+    this.hideEdit = false;
     this.editing = game;
     this.score1.nativeElement.value = game.scoreOne;
     this.score2.nativeElement.value = game.scoreTwo;
@@ -74,19 +76,20 @@ export class RecordViewerComponent implements OnInit {
     this.player2.nativeElement.value = game.playerTwo;
   }
 
-  save(player1, player2, score1, score2) {
+  save(player1, player2, score1, score2, override = false) {
     if (
       player1 !== player2 &&
       this.editing.playerOne !== player1 ||
       this.editing.playerTwo !== player2 ||
       this.editing.scoreOne !== score1 ||
-      this.editing.scoreTwo !== score2
+      this.editing.scoreTwo !== score2 ||
+      override
     ) {
-      this.hide = true;
-      this.editing.playerOne = player1;
-      this.editing.playerTwo = player2;
-      this.editing.scoreOne = score1;
-      this.editing.scoreTwo = score2;
+      this.hideEdit = true;
+      // this.editing.playerOne = player1;
+      // this.editing.playerTwo = player2;
+      // this.editing.scoreOne = score1;
+      // this.editing.scoreTwo = score2;
       fetch(`https://catalyte-pong.herokuapp.com/games/update?playerOne=${player1}&playerTwo=${player2
       }&scoreOne=${score1}&scoreTwo=${score2}&gameNumber=${this.editing.gameNumber}`, {mode: 'cors'})
         .then(res => res.text()).then(console.log);
@@ -94,6 +97,18 @@ export class RecordViewerComponent implements OnInit {
   }
 
   hideMe() {
-    this.hide = true;
+    this.hideEdit = true;
+    this.hideHistory = true;
+  }
+
+  revert(index) {
+    this.editing = this.history[index];
+    this.save(this.editing.playerOne, this.editing.playerTwo, this.editing.scoreOne, this.editing.scoreTwo, true);
+  }
+
+  hist(game) {
+    this.editing = game;
+    this.history = game.history;
+    this.hideHistory = false;
   }
 }

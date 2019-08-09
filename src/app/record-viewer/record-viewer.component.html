@@ -30,14 +30,17 @@
       <td>
         <button (click)="edit(game)">edit</button>
       </td>
+      <td *ngIf="game.history?.length > 0">
+        <button (click)="hist(game)">history</button>
+      </td>
     </tr>
   </table>
 
 </div>
 
-<form [ngClass]="{'hide': hide}">
+<form [ngClass]="{'hide': hideEdit}">
   <h1 *ngIf="editing"> editing game #{{ editing.gameNumber }}</h1>
-  <table class="pad">
+  <table>
     <tr>
       <td>
         <select #player1>
@@ -57,5 +60,24 @@
     </tr>
   </table>
   <button type="button" (click)="save(player1.value, player2.value, score1.value, score2.value)">save game</button>
+  <button type="button" (click)="hideMe()">close</button>
+</form>
+
+<form [ngClass]="{'hide': hideHistory}">
+  <h1 *ngIf="history"> history for game #{{ editing.gameNumber }}</h1>
+  <table *ngIf="history?.length > 0">
+    <tr *ngFor="let game of history; let i = index">
+      <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
+        {{ game.playerOne }}<br>{{ game.scoreOne }}
+      </td>
+      <td>vs</td>
+      <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
+        {{ game.playerTwo }}<br>{{ game.scoreTwo }}
+      </td>
+      <td>
+        <button (click)="revert(i)">revert</button>
+      </td>
+    </tr>
+  </table>
   <button type="button" (click)="hideMe()">close</button>
 </form>
