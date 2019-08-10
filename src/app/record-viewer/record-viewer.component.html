@@ -16,9 +16,16 @@
   </select>
   <button (click)="lookupPlayers(playerOne.value, playerTwo.value)">lookup</button>
   <br>
-
-
+  <br>
   <table *ngIf="games?.length > 0">
+    <tr>
+      <th>player one</th>
+      <th></th>
+      <th>player two</th>
+      <th>date</th>
+      <th>edit</th>
+      <th *ngIf="hasHistory">history</th>
+    </tr>
     <tr *ngFor="let game of games">
       <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
         {{ game.playerOne }}<br>{{ game.scoreOne }}
@@ -27,6 +34,7 @@
       <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
         {{ game.playerTwo }}<br>{{ game.scoreTwo }}
       </td>
+      <td>{{ formatDate(game.time) }}</td>
       <td>
         <button (click)="edit(game)">edit</button>
       </td>
@@ -39,7 +47,7 @@
 </div>
 
 <form [ngClass]="{'hide': hideEdit}">
-  <h1 *ngIf="editing"> editing game #{{ editing.gameNumber }}</h1>
+  <h1 *ngIf="editing"> editing game on {{ formatDate(editing.time) }}</h1>
   <table>
     <tr>
       <td>
@@ -64,7 +72,7 @@
 </form>
 
 <form [ngClass]="{'hide': hideHistory}">
-  <h1 *ngIf="history"> history for game #{{ editing.gameNumber }}</h1>
+  <h1 *ngIf="history"> history for game on {{ formatDate(editing.time) }}</h1>
   <table *ngIf="history?.length > 0">
     <tr *ngFor="let game of history; let i = index">
       <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">

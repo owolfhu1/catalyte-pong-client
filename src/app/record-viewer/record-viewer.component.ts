@@ -6,7 +6,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
   styleUrls: ['./record-viewer.component.css']
 })
 export class RecordViewerComponent implements OnInit {
-  games: { gameNumber: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
+  games: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
   @ViewChild('player') player: ElementRef;
   @ViewChild('playerOne') playerOne: ElementRef;
   @ViewChild('playerTwo') playerTwo: ElementRef;
@@ -18,7 +18,7 @@ export class RecordViewerComponent implements OnInit {
   hideEdit = true;
   hideHistory = true;
   editing;
-  history: { gameNumber: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
+  history: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
 
   constructor() { }
 
@@ -86,12 +86,8 @@ export class RecordViewerComponent implements OnInit {
       override
     ) {
       this.hideEdit = true;
-      // this.editing.playerOne = player1;
-      // this.editing.playerTwo = player2;
-      // this.editing.scoreOne = score1;
-      // this.editing.scoreTwo = score2;
       fetch(`https://catalyte-pong.herokuapp.com/games/update?playerOne=${player1}&playerTwo=${player2
-      }&scoreOne=${score1}&scoreTwo=${score2}&gameNumber=${this.editing.gameNumber}`, {mode: 'cors'})
+      }&scoreOne=${score1}&scoreTwo=${score2}&time=${this.editing.time}`, {mode: 'cors'})
         .then(res => res.text()).then(console.log);
     }
   }
@@ -110,5 +106,20 @@ export class RecordViewerComponent implements OnInit {
     this.editing = game;
     this.history = game.history;
     this.hideHistory = false;
+  }
+
+  get hasHistory() {
+    let has = false;
+    this.games.forEach(game => has = game.history.length > 0 ? true : has);
+    return has;
+  }
+
+  formatDate(time) {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const date = new Date(time);
+    const m = date.getHours() > 11 ? 'pm' : 'am';
+    const mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    const timeFormat = `${m === 'am' ? date.getHours() : date.getHours() - 11}:${mins} ${m}`;
+    return `${days[date.getDay()]} ${date.getDate()}/${date.getMonth()}/${date.getFullYear() - 2000} at ${timeFormat}`;
   }
 }

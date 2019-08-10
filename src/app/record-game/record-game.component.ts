@@ -24,8 +24,9 @@ export class RecordGameComponent implements OnInit {
       this.text = 'Please enter valid scores';
       setTimeout(() => this.text = 'record a game here', 3000);
     } else {
+      const time = new Date().getTime();
       fetch('https://catalyte-pong.herokuapp.com/games/add' +
-        `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}`,
+        `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}&time=${time}`,
         {mode: 'cors'}).then(res => res.text()).then(result => {
           this.text = result;
         setTimeout(() => this.text = 'record a game here', 3000);
