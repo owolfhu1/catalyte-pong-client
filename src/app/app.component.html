@@ -1,8 +1,21 @@
-<h1>{{ text }}</h1>
+<span *ngIf="!selected && apiBooted">Select what you would like to do here: </span>
 
-<table>
-  <tr><td><app-register></app-register></td></tr>
-  <tr><td><app-record-game></app-record-game></td></tr>
-  <tr><td><app-record-viewer></app-record-viewer></td></tr>
-  <tr><td><app-highscore></app-highscore></td></tr>
+<select #selection (change)="onSelectionChange()">
+  <option value="register">register a player</option>
+  <option value="record">record a game</option>
+  <option value="lookup">lookup games</option>
+  <option value="highscores">view high scores</option>
+  <option value="">not a damn thing</option>
+</select>
+
+<table *ngIf="apiBooted">
+  <tr *ngIf="showRegister"><td><app-register></app-register></td></tr>
+  <tr *ngIf="showRecorder"><td><app-record-game></app-record-game></td></tr>
+  <tr *ngIf="showGameLookup"><td><app-record-viewer></app-record-viewer></td></tr>
+  <tr *ngIf="showHighscores"><td><app-highscore></app-highscore></td></tr>
 </table>
+
+<table *ngIf="!apiBooted">
+  <tr><td><div><h1>Please wait for API to boot</h1></div></td></tr>
+</table>
+
