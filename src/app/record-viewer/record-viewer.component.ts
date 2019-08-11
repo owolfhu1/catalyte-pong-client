@@ -19,6 +19,7 @@ export class RecordViewerComponent implements OnInit {
   hideHistory = true;
   editing;
   history: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
+  lastCall;
 
   constructor() { }
 
@@ -28,6 +29,7 @@ export class RecordViewerComponent implements OnInit {
   }
 
   viewAll() {
+    this.lastCall = () => this.viewAll();
     fetch('https://catalyte-pong.herokuapp.com/games/all', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.games = result;
@@ -49,6 +51,7 @@ export class RecordViewerComponent implements OnInit {
   }
 
   lookupPlayer(player) {
+    this.lastCall = () => this.lookupPlayer(player);
     if (player) {
       fetch('https://catalyte-pong.herokuapp.com/games/player?player=' + player, {mode: 'cors'}).then(res => res.json())
         .then(result => {
@@ -58,6 +61,7 @@ export class RecordViewerComponent implements OnInit {
   }
 
   lookupPlayers(playerOne, playerTwo) {
+    this.lastCall = () => this.lookupPlayers(playerOne, playerTwo);
     if (playerOne || playerTwo) {
       fetch(`https://catalyte-pong.herokuapp.com/games/vs?playerOne=${playerOne}&playerTwo=${playerTwo}`, {mode: 'cors'})
         .then(res => res.json())
@@ -85,10 +89,10 @@ export class RecordViewerComponent implements OnInit {
       this.editing.scoreTwo !== score2 ||
       override
     ) {
-      this.hideEdit = true;
+      this.hideMe();
       fetch(`https://catalyte-pong.herokuapp.com/games/update?playerOne=${player1}&playerTwo=${player2
       }&scoreOne=${score1}&scoreTwo=${score2}&time=${this.editing.time}`, {mode: 'cors'})
-        .then(res => res.text()).then(console.log);
+        .then(res => res.text()).then(this.lastCall);
     }
   }
 
