@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HighscoreComponent implements OnInit {
 
-  players: { id: string, rating: number, username: string , wins: number, losses: number}[] = [];
+  players: { id: string, rating: number, zachRating: number, username: string , wins: number, losses: number}[] = [];
 
   constructor() { }
 

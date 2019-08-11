@@ -4,7 +4,8 @@
     <tr>
       <th>#</th>
       <th>name</th>
-      <th><button (click)="fetchScores('rating')">rating</button></th>
+      <th><button (click)="fetchScores('rating')"> skill rating</button></th>
+      <th><button (click)="fetchScores('zachRating')">zach's rating</button></th>
       <th><button (click)="fetchScores('games')">games</button></th>
       <th><button (click)="fetchScores('wins')">wins</button></th>
       <th><button (click)="fetchScores('losses')">losses</button></th>
@@ -14,6 +15,7 @@
       <td>{{ i + 1 }}</td>
       <td>{{ player.username }}</td>
       <td>{{ round(player.rating) }}</td>
+      <td>{{ round(player.zachRating) }}</td>
       <td>{{ player.wins + player.losses }}</td>
       <td>{{ player.wins }}</td>
       <td>{{ player.losses }}</td>
