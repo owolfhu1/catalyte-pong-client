@@ -8,14 +8,16 @@
       <th><button (click)="fetchScores('games')">games</button></th>
       <th><button (click)="fetchScores('wins')">wins</button></th>
       <th><button (click)="fetchScores('losses')">losses</button></th>
+      <th><button (click)="fetchScores('winPercent')">win%</button></th>
     </tr>
     <tr *ngFor="let player of players; let i = index">
       <td>{{ i + 1 }}</td>
       <td>{{ player.username }}</td>
-      <td>{{ format(player.rating) }}</td>
+      <td>{{ round(player.rating) }}</td>
       <td>{{ player.wins + player.losses }}</td>
       <td>{{ player.wins }}</td>
       <td>{{ player.losses }}</td>
+      <td>{{ winPercent(player) }}</td>
     </tr>
   </table>
 </div>
