@@ -6,7 +6,6 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
   styleUrls: ['./record-viewer.component.css']
 })
 export class RecordViewerComponent implements OnInit {
-  games: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
   @ViewChild('player') player: ElementRef;
   @ViewChild('playerOne') playerOne: ElementRef;
   @ViewChild('playerTwo') playerTwo: ElementRef;
@@ -14,11 +13,12 @@ export class RecordViewerComponent implements OnInit {
   @ViewChild('player2') player2: ElementRef;
   @ViewChild('score1') score1: ElementRef;
   @ViewChild('score2') score2: ElementRef;
-  names;
+  games: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
+  history: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
+  names = [];
   hideEdit = true;
   hideHistory = true;
   editing;
-  history: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
   lastCall;
 
   constructor() { }
@@ -124,6 +124,6 @@ export class RecordViewerComponent implements OnInit {
     const m = date.getHours() > 11 ? 'pm' : 'am';
     const mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
     const timeFormat = `${m === 'am' ? date.getHours() : date.getHours() - 11}:${mins} ${m}`;
-    return `${days[date.getDay()]} ${date.getDate()}/${date.getMonth()}/${date.getFullYear() - 2000} at ${timeFormat}`;
+    return `${days[date.getDay()]} ${date.getMonth()}/${date.getDate()}/${date.getFullYear() - 2000} at ${timeFormat}`;
   }
 }
