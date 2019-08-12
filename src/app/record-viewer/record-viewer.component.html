@@ -17,6 +17,12 @@
   <button (click)="lookupPlayers(playerOne.value, playerTwo.value)">lookup</button>
   <br>
   <br>
+
+  from <input type="date" (change)="lowChange($event)">
+  to <input type="date" (change)="highChange($event)">
+
+  <br>
+  <br>
   <table *ngIf="games?.length > 0">
     <tr>
       <th>player one</th>
@@ -27,18 +33,18 @@
       <th *ngIf="hasHistory">history</th>
     </tr>
     <tr *ngFor="let game of games">
-      <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
+      <td *ngIf="showGame(game.time)" [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
         {{ game.playerOne }}<br>{{ game.scoreOne }}
       </td>
-      <td>vs</td>
-      <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
+      <td *ngIf="showGame(game.time)">vs</td>
+      <td *ngIf="showGame(game.time)" [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
         {{ game.playerTwo }}<br>{{ game.scoreTwo }}
       </td>
-      <td>{{ formatDate(game.time) }}</td>
-      <td>
+      <td *ngIf="showGame(game.time)">{{ formatDate(game.time) }}</td>
+      <td *ngIf="showGame(game.time)">
         <button (click)="edit(game)">edit</button>
       </td>
-      <td *ngIf="game.history?.length > 0">
+      <td *ngIf="game.history?.length > 0 && showGame(game.time)">
         <button (click)="hist(game)">history</button>
       </td>
     </tr>

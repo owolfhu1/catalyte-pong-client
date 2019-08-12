@@ -20,7 +20,8 @@ export class RecordViewerComponent implements OnInit {
   hideHistory = true;
   editing;
   lastCall;
-
+  lowFilter;
+  highFilter;
   constructor() { }
 
   ngOnInit() {
@@ -124,6 +125,24 @@ export class RecordViewerComponent implements OnInit {
     const m = date.getHours() > 11 ? 'pm' : 'am';
     const mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
     const timeFormat = `${m === 'am' ? date.getHours() : date.getHours() - 11}:${mins} ${m}`;
-    return `${days[date.getDay()]} ${date.getMonth()}/${date.getDate()}/${date.getFullYear() - 2000} at ${timeFormat}`;
+    return `${days[date.getDay()]} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear() - 2000} at ${timeFormat}`;
+  }
+
+  lowChange($event) {
+    if ($event.target.validity.valid) {
+      this.lowFilter = $event.target.valueAsNumber;
+    }
+  }
+
+  highChange($event) {
+    if ($event.target.validity.valid) {
+      this.highFilter = $event.target.valueAsNumber;
+    }
+  }
+
+  showGame(time) {
+    if (this.lowFilter && this.highFilter) {
+      return this.lowFilter < time && (this.highFilter + 86400000) > time;
+    } else { return true; };
   }
 }
