@@ -17,7 +17,7 @@ export class RecordViewerComponent implements OnInit {
   @ViewChild('high') high: ElementRef;
   games: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
   history: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
-  names = [];
+  names: string[] = [];
   hideEdit = true;
   hideHistory = true;
   editing;
@@ -184,5 +184,15 @@ export class RecordViewerComponent implements OnInit {
       this.high.nativeElement.valueAsNumber = upper;
       this.highFilter = upper;
     }
+  }
+
+  get filteredGames() {
+    const list = [];
+    this.games.forEach(game => {
+      if (this.showGame(game.time)) {
+        list.push(game);
+      }
+    });
+    return list;
   }
 }
