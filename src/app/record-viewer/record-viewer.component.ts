@@ -13,6 +13,8 @@ export class RecordViewerComponent implements OnInit {
   @ViewChild('player2') player2: ElementRef;
   @ViewChild('score1') score1: ElementRef;
   @ViewChild('score2') score2: ElementRef;
+  @ViewChild('low') low: ElementRef;
+  @ViewChild('high') high: ElementRef;
   games: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] = [];
   history: { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number}[];
   names = [];
@@ -22,6 +24,9 @@ export class RecordViewerComponent implements OnInit {
   lastCall;
   lowFilter;
   highFilter;
+  single = 'someone';
+  a = 'a';
+  b = 'b';
   constructor() { }
 
   ngOnInit() {
@@ -143,6 +148,25 @@ export class RecordViewerComponent implements OnInit {
   showGame(time) {
     if (this.lowFilter && this.highFilter) {
       return this.lowFilter < time && (this.highFilter + 86400000) > time;
-    } else { return true; };
+    } else { return true; }
+  }
+
+  reset() {
+    this.lowFilter = undefined;
+    this.highFilter = undefined;
+    this.low.nativeElement.value = undefined;
+    this.high.nativeElement.value = undefined;
+  }
+
+  changeSingle($event) {
+    this.single = $event.target.value;
+  }
+
+  changePersonA($event) {
+    this.a = $event.target.value;
+  }
+
+  changePersonB($event) {
+    this.b = $event.target.value;
   }
 }

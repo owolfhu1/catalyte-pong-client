@@ -2,25 +2,24 @@
   <h1>Games</h1>
 
   <button (click)="viewAll()">view all games</button><button (click)="clear()">clear</button><br>
-  <select #player>
+  <select #player (change)="changeSingle($event)">
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>
   </select>
-  <button (click)="lookupPlayer(player.value)">'s games</button>
+  <button (click)="lookupPlayer(player.value)">look up {{ single }}'s games</button>
   <br>
-  <select #playerOne>
+  <select #playerOne (change)="changePersonA($event)">
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>
   </select>
   vs
-  <select #playerTwo>
+  <select #playerTwo (change)="changePersonB($event)">
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>
   </select>
-  <button (click)="lookupPlayers(playerOne.value, playerTwo.value)">lookup</button>
+  <button (click)="lookupPlayers(playerOne.value, playerTwo.value)">lookup games {{ a }} vs {{ b }}</button>
   <br>
   <br>
-
-  from <input type="date" (change)="lowChange($event)">
-  to <input type="date" (change)="highChange($event)">
-
+  from <input type="date" (change)="lowChange($event)" #low>
+  to <input type="date" (change)="highChange($event)" #high>
+  <button (click)="reset()">reset</button>
   <br>
   <br>
   <table *ngIf="games?.length > 0">
