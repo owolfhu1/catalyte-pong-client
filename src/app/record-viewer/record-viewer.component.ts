@@ -39,6 +39,7 @@ export class RecordViewerComponent implements OnInit {
     fetch('https://catalyte-pong.herokuapp.com/games/all', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.games = result;
+        this.takeGames(result);
       });
   }
 
@@ -62,6 +63,7 @@ export class RecordViewerComponent implements OnInit {
       fetch('https://catalyte-pong.herokuapp.com/games/player?player=' + player, {mode: 'cors'}).then(res => res.json())
         .then(result => {
           this.games = result;
+          this.takeGames(result);
         });
     }
   }
@@ -73,6 +75,7 @@ export class RecordViewerComponent implements OnInit {
         .then(res => res.json())
         .then(result => {
           this.games = result;
+          this.takeGames(result);
         });
     }
   }
@@ -168,5 +171,18 @@ export class RecordViewerComponent implements OnInit {
 
   changePersonB($event) {
     this.b = $event.target.value;
+  }
+
+  takeGames(result) {
+    if (result.length > 0) {
+      const lowerd = new Date(result[0].time);
+      const lower = new Date(`${lowerd.getMonth() + 1}-${lowerd.getDate()}-${lowerd.getFullYear()}`).getTime();
+      const upperd = new Date(result[result.length - 1].time);
+      const upper = new Date(`${upperd.getMonth() + 1}-${upperd.getDate()}-${upperd.getFullYear()}`).getTime();
+      this.low.nativeElement.valueAsNumber = lower;
+      this.lowFilter = lower;
+      this.high.nativeElement.valueAsNumber = upper;
+      this.highFilter = upper;
+    }
   }
 }
