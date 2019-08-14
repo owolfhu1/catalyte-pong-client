@@ -45,8 +45,10 @@ export class ExpectationsComponent implements OnInit {
     if (one && two) {
       fetch(`https://catalyte-pong.herokuapp.com/players/expect?playerOne=${one}&playerTwo=${two}`, {mode: 'cors'}).then(res => res.json())
         .then(result => {
-          this.msg = ` ${this.round(100 * result[0])}% vs ${this.round(100 * result[1])}%`;
+          const multiplier = 21 / (result[0] > result[1] ? result[0] : result[1]);
+          this.msg = ` ${this.round(multiplier * result[0])} to ${this.round(multiplier * result[1])}`;
         });
     }
   }
+
 }
