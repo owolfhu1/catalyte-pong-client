@@ -1,0 +1,12 @@
+<div>
+  <h1>expected outcome of 2 players</h1>
+  <select #one>
+    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+  </select>
+  vs
+  <select #two>
+    <option *ngFor="let name of names" [value]="name">{{ name }}</option>
+  </select>&nbsp;
+  <button (click)="getExpectation()"> = </button>
+  {{ msg }}
+</div>

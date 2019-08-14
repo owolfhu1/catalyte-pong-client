@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { RecordGameComponent } from './record-game/record-game.component';
 import { RecordViewerComponent } from './record-viewer/record-viewer.component';
 import { HighscoreComponent } from './highscore/highscore.component';
+import { ExpectationsComponent } from './expectations/expectations.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { HighscoreComponent } from './highscore/highscore.component';
     RegisterComponent,
     RecordGameComponent,
     RecordViewerComponent,
-    HighscoreComponent
+    HighscoreComponent,
+    ExpectationsComponent
   ],
   imports: [
     BrowserModule

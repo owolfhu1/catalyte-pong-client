@@ -186,7 +186,7 @@ export class RecordViewerComponent implements OnInit {
     }
   }
 
-  get filteredGames() {
+  get filteredGames(): { time: number, playerOne: string, playerTwo: string, scoreOne: number, scoreTwo: number, history: []}[] {
     const list = [];
     this.games.forEach(game => {
       if (this.showGame(game.time)) {

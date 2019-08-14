@@ -36,6 +36,10 @@ export class AppComponent {
     return this.selected === 'highscores';
   }
 
+  get showExpectation() {
+    return this.selected === 'expectation';
+  }
+
   onSelectionChange() {
     this.selected = this.selection.nativeElement.value;
   }
