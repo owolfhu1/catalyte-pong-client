@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Strings} from '../constants';
 
 @Component({
   selector: 'app-record-game',
@@ -25,7 +26,7 @@ export class RecordGameComponent implements OnInit {
       setTimeout(() => this.text = 'record a game here', 3000);
     } else {
       const time = new Date().getTime();
-      fetch('https://catalyte-pong.herokuapp.com/games/add' +
+      fetch(Strings.URL + 'games/add' +
         `?playerOne=${playerOne}&playerTwo=${playerTwo}&scoreOne=${scoreOne}&scoreTwo=${scoreTwo}&time=${time}`,
         {mode: 'cors'}).then(res => res.text()).then(result => {
           this.text = result;
@@ -37,7 +38,7 @@ export class RecordGameComponent implements OnInit {
   }
 
   getNames() {
-    fetch('https://catalyte-pong.herokuapp.com/players/list', {mode: 'cors'}).then(res => res.json())
+    fetch(Strings.URL + 'players/list', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.names = result;
         this.playerOne.nativeElement.value = null;

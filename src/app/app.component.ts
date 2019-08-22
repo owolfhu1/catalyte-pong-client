@@ -1,4 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Strings} from './constants';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   selected;
 
   constructor() {
-    fetch(`https://catalyte-pong.herokuapp.com/players/test`, {mode: 'cors'})
+    fetch(Strings.URL + `players/test`, {mode: 'cors'})
       .then(res => res.text()).then(() => {
         this.apiBooted = true;
         this.selection.nativeElement.value = null;

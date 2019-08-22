@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Strings} from '../constants';
 
 @Component({
   selector: 'app-expectations',
@@ -31,7 +32,7 @@ export class ExpectationsComponent implements OnInit {
   }
 
   getNames() {
-    fetch('https://catalyte-pong.herokuapp.com/players/list', {mode: 'cors'}).then(res => res.json())
+    fetch(Strings.URL + 'players/list', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.names = result;
         this.one.nativeElement.value = null;
@@ -43,7 +44,7 @@ export class ExpectationsComponent implements OnInit {
     const one = this.one.nativeElement.value;
     const two = this.two.nativeElement.value;
     if (one && two) {
-      fetch(`https://catalyte-pong.herokuapp.com/players/expect?playerOne=${one}&playerTwo=${two}`, {mode: 'cors'}).then(res => res.json())
+      fetch(Strings.URL + `players/expect?playerOne=${one}&playerTwo=${two}`, {mode: 'cors'}).then(res => res.json())
         .then(result => {
           const multiplier = 21 / (result[0] > result[1] ? result[0] : result[1]);
           this.msg = ` ${this.round(multiplier * result[0])} to ${this.round(multiplier * result[1])}`;

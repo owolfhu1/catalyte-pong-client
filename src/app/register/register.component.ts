@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Strings} from '../constants';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   register(value) {
     if (/^[a-zA-Z]+$/.test(value)) {
-      fetch(`https://catalyte-pong.herokuapp.com/players/register?username=${value}`, {mode: 'cors'})
+      fetch(Strings.URL + `players/register?username=${value}`, {mode: 'cors'})
         .then(res => res.text()).then(result => {
           this.text = result;
           setTimeout(() => this.text = 'register new players here', 3000);

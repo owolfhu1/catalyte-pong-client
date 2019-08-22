@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Strings} from '../constants';
 
 @Component({
   selector: 'app-record-viewer',
@@ -36,7 +37,7 @@ export class RecordViewerComponent implements OnInit {
 
   viewAll() {
     this.lastCall = () => this.viewAll();
-    fetch('https://catalyte-pong.herokuapp.com/games/all', {mode: 'cors'}).then(res => res.json())
+    fetch(Strings.URL + 'games/all', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.games = result;
         this.takeGames(result);
@@ -48,7 +49,7 @@ export class RecordViewerComponent implements OnInit {
   }
 
   getNames() {
-    fetch('https://catalyte-pong.herokuapp.com/players/list', {mode: 'cors'}).then(res => res.json())
+    fetch(Strings.URL + 'players/list', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.names = result;
         this.player.nativeElement.value = null;
@@ -60,7 +61,7 @@ export class RecordViewerComponent implements OnInit {
   lookupPlayer(player) {
     this.lastCall = () => this.lookupPlayer(player);
     if (player) {
-      fetch('https://catalyte-pong.herokuapp.com/games/player?player=' + player, {mode: 'cors'}).then(res => res.json())
+      fetch(Strings.URL + 'games/player?player=' + player, {mode: 'cors'}).then(res => res.json())
         .then(result => {
           this.games = result;
           this.takeGames(result);
@@ -71,7 +72,7 @@ export class RecordViewerComponent implements OnInit {
   lookupPlayers(playerOne, playerTwo) {
     this.lastCall = () => this.lookupPlayers(playerOne, playerTwo);
     if (playerOne || playerTwo) {
-      fetch(`https://catalyte-pong.herokuapp.com/games/vs?playerOne=${playerOne}&playerTwo=${playerTwo}`, {mode: 'cors'})
+      fetch(Strings.URL + `games/vs?playerOne=${playerOne}&playerTwo=${playerTwo}`, {mode: 'cors'})
         .then(res => res.json())
         .then(result => {
           this.games = result;
@@ -99,7 +100,7 @@ export class RecordViewerComponent implements OnInit {
       override
     ) {
       this.hideMe();
-      fetch(`https://catalyte-pong.herokuapp.com/games/update?playerOne=${player1}&playerTwo=${player2
+      fetch(Strings.URL + `games/update?playerOne=${player1}&playerTwo=${player2
       }&scoreOne=${score1}&scoreTwo=${score2}&time=${this.editing.time}`, {mode: 'cors'})
         .then(res => res.text()).then(this.lastCall);
     }

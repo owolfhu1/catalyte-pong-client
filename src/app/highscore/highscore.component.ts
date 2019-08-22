@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Strings} from '../constants';
 
 @Component({
   selector: 'app-highscore',
@@ -16,7 +17,7 @@ export class HighscoreComponent implements OnInit {
   }
 
   fetchScores(type) {
-    fetch('https://catalyte-pong.herokuapp.com/players/scores?type=' + type, {mode: 'cors'}).then(res => res.json())
+    fetch(Strings.URL + 'players/scores?type=' + type, {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.players = result;
       });
