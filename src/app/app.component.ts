@@ -41,6 +41,10 @@ export class AppComponent {
     return this.selected === 'expectation';
   }
 
+  get showSeasons() {
+    return this.selected === 'seasons';
+  }
+
   onSelectionChange() {
     this.selected = this.selection.nativeElement.value;
   }

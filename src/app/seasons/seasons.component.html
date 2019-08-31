@@ -1,0 +1,18 @@
+<div>
+  <h1>Seasons</h1>
+
+  <input type="password" #pass> <button (click)="end(pass.value)">end season</button>
+  <br>
+
+  <button
+    *ngFor="let s of seasons"
+    (click)="setSeason(s)">
+    {{ formatSeason(s) }}
+  </button>
+
+  <h2>{{ season.start === 0 ? null : formatSeason(season) }}</h2>
+  <app-score-grid
+    (fetch)="fetch($event)"
+    [players]="players">
+  </app-score-grid>
+</div>

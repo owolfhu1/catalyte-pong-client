@@ -6,6 +6,7 @@
   <option value="lookup">lookup games</option>
   <option value="highscores">view high scores</option>
   <option value="expectation">check expectations</option>
+  <option value="seasons">seasonal scores</option>
 </select>
 
 <table *ngIf="apiBooted">
@@ -14,6 +15,7 @@
   <tr *ngIf="showGameLookup"><td><app-record-viewer></app-record-viewer></td></tr>
   <tr *ngIf="showHighscores"><td><app-highscore></app-highscore></td></tr>
   <tr *ngIf="showExpectation"><td><app-expectations></app-expectations></td></tr>
+  <tr *ngIf="showSeasons"><td><app-seasons></app-seasons></td></tr>
 </table>
 
 <table *ngIf="!apiBooted">

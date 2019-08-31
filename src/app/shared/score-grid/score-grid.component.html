@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>#</th>
+    <th>name</th>
+    <th><button (click)="fetch.emit('rating')"> skill rating</button></th>
+    <th><button (click)="fetch.emit('zachRating')">zach's rating</button></th>
+    <th><button (click)="fetch.emit('games')">games</button></th>
+    <th><button (click)="fetch.emit('wins')">wins</button></th>
+    <th><button (click)="fetch.emit('losses')">losses</button></th>
+    <th><button (click)="fetch.emit('winPercent')">win%</button></th>
+  </tr>
+  <tr *ngFor="let player of players; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ player.username }}</td>
+    <td>{{ round(player.rating) }}</td>
+    <td>{{ round(player.zachRating) }}</td>
+    <td>{{ player.wins + player.losses }}</td>
+    <td>{{ player.wins }}</td>
+    <td>{{ player.losses }}</td>
+    <td>{{ winPercent(player) }}</td>
+  </tr>
+</table>
