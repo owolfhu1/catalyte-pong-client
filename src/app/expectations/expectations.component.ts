@@ -44,20 +44,17 @@ export class ExpectationsComponent implements OnInit {
     const one = this.one.nativeElement.value;
     const two = this.two.nativeElement.value;
     if (one && two) {
-      if (!useCurrent) {
-        fetch(Strings.URL + `players/expect?playerOne=${one}&playerTwo=${two}`, {mode: 'cors'}).then(res => res.json())
-          .then(result => {
-            const multiplier = 21 / (result[0] > result[1] ? result[0] : result[1]);
-            this.msg = ` ${this.round(multiplier * result[0])} to ${this.round(multiplier * result[1])}`;
-          });
-      } else {
-        fetch(Strings.URL + `seasons/expect?playerOne=${one}&playerTwo=${two}`, {mode: 'cors'}).then(res => res.json())
-          .then(result => {
-            const multiplier = 21 / (result[0] > result[1] ? result[0] : result[1]);
-            this.msg = ` ${this.round(multiplier * result[0])} to ${this.round(multiplier * result[1])}`;
-          });
-      }
+      fetch(
+        Strings.URL + `${useCurrent ? 'seasons' : 'players'}/expect?playerOne=${one}&playerTwo=${two}`,
+        {mode: 'cors'}).then(res => res.json()
+      ).then(result => {
+        const multiplier = 21 / (result[0] > result[1] ? result[0] : result[1]);
+        if (!result[0] || !result[1]) {
+          this.msg = 'bad input';
+        } else {
+          this.msg = ` ${this.round(multiplier * result[0])} to ${this.round(multiplier * result[1])}`;
+        }
+      });
     }
   }
-
 }
