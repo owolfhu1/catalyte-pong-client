@@ -22,13 +22,14 @@ export class SeasonsComponent implements OnInit {
       .then(result => {
         this.players = result;
       });
-    fetch(Strings.URL + 'seasons/currentObj', {mode: 'cors'}).then(res => res.json())
-      .then(result => {
-        this.season = result;
-      });
     fetch(Strings.URL + 'seasons/all', {mode: 'cors'}).then(res => res.json())
       .then(result => {
         this.seasons = result;
+        result.forEach(season => {
+          if (!season.end) {
+            this.season = season;
+          }
+        });
       });
   }
 
@@ -55,12 +56,6 @@ export class SeasonsComponent implements OnInit {
 
   end(pass) {
     fetch(Strings.URL + `seasons/end?word=${pass}&time=${new Date().getTime()}`, {mode: 'cors'}).then(res => res.text())
-      .then(result => {
-        if (result) {
-          alert(result);
-        } else {
-          alert('something when wrong, you probably entered a bad password');
-        }
-      });
+      .then(result => alert(result ? result : 'Something went wrong, you probably entered a bad password.'));
   }
 }
