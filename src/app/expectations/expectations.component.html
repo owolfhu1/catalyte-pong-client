@@ -1,5 +1,7 @@
 <div>
   <h1>expected outcome of 2 players</h1>
+  <input type="checkbox" #useCurrent> use current season
+  <br>
   <select #one>
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>
   </select>
@@ -7,6 +9,6 @@
   <select #two>
     <option *ngFor="let name of names" [value]="name">{{ name }}</option>
   </select>&nbsp;
-  <button (click)="getExpectation()"> = </button>
+  <button (click)="getExpectation(useCurrent.checked)"> = </button>
   {{ msg }}
 </div>

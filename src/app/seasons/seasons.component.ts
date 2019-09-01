@@ -56,7 +56,11 @@ export class SeasonsComponent implements OnInit {
   end(pass) {
     fetch(Strings.URL + `seasons/end?word=${pass}&time=${new Date().getTime()}`, {mode: 'cors'}).then(res => res.text())
       .then(result => {
-        console.log('end', result);
+        if (result) {
+          alert(result);
+        } else {
+          alert('something when wrong, you probably entered a bad password');
+        }
       });
   }
 }
