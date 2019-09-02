@@ -129,12 +129,7 @@ export class RecordViewerComponent implements OnInit {
   }
 
   formatDate(time) {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const date = new Date(time);
-    const m = date.getHours() > 11 ? 'pm' : 'am';
-    const mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-    const timeFormat = `${m === 'am' ? date.getHours() : date.getHours() - 11}:${mins} ${m}`;
-    return `${days[date.getDay()]} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear() - 2000} at ${timeFormat}`;
+    return new Date(time).toLocaleString();
   }
 
   lowChange($event) {
