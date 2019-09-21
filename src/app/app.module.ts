@@ -9,6 +9,7 @@ import { HighscoreComponent } from './highscore/highscore.component';
 import { ExpectationsComponent } from './expectations/expectations.component';
 import { SeasonsComponent } from './seasons/seasons.component';
 import { ScoreGridComponent } from './shared/score-grid/score-grid.component';
+import { ScoreChartComponent } from './score-chart/score-chart.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ScoreGridComponent } from './shared/score-grid/score-grid.component';
     HighscoreComponent,
     ExpectationsComponent,
     SeasonsComponent,
-    ScoreGridComponent
+    ScoreGridComponent,
+    ScoreChartComponent
   ],
   imports: [
     BrowserModule

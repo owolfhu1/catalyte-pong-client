@@ -22,32 +22,35 @@
   <button (click)="reset()">reset</button>
   <br>
   <br>
-  <table *ngIf="games?.length > 0">
-    <tr>
-      <th>player one</th>
-      <th></th>
-      <th>player two</th>
-      <th>date</th>
-      <th>edit</th>
-      <th *ngIf="hasHistory">history</th>
-    </tr>
-    <tr *ngFor="let game of filteredGames">
-      <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
-        {{ game.playerOne }}<br>{{ game.scoreOne }}
-      </td>
-      <td>vs</td>
-      <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
-        {{ game.playerTwo }}<br>{{ game.scoreTwo }}
-      </td>
-      <td>{{ formatDate(game.time) }}</td>
-      <td>
-        <button (click)="edit(game)">edit</button>
-      </td>
-      <td *ngIf="game.history?.length > 0">
-        <button (click)="hist(game)">history</button>
-      </td>
-    </tr>
-  </table>
+  <div class="frame">
+    <table *ngIf="games?.length > 0">
+      <tr>
+        <th>player one</th>
+        <th></th>
+        <th>player two</th>
+        <th>date</th>
+        <th>edit</th>
+        <th *ngIf="hasHistory">history</th>
+      </tr>
+      <tr *ngFor="let game of filteredGames">
+        <td [ngClass]="{'win': game.scoreOne > game.scoreTwo}">
+          {{ game.playerOne }}<br>{{ game.scoreOne }}
+        </td>
+        <td>vs</td>
+        <td [ngClass]="{'win': game.scoreOne < game.scoreTwo}">
+          {{ game.playerTwo }}<br>{{ game.scoreTwo }}
+        </td>
+        <td>{{ formatDate(game.time) }}</td>
+        <td>
+          <button (click)="edit(game)">edit</button>
+        </td>
+        <td *ngIf="game.history?.length > 0">
+          <button (click)="hist(game)">history</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
 
 </div>
 

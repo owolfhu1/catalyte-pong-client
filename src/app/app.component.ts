@@ -45,6 +45,10 @@ export class AppComponent {
     return this.selected === 'seasons';
   }
 
+  get showGraph() {
+    return this.selected === 'graph';
+  }
+
   onSelectionChange() {
     this.selected = this.selection.nativeElement.value;
   }

@@ -7,6 +7,7 @@
   <option value="highscores">view high scores</option>
   <option value="expectation">check expectations</option>
   <option value="seasons">seasonal scores</option>
+  <option value="graph">score graph</option>
 </select>
 
 <table *ngIf="apiBooted">
@@ -16,6 +17,7 @@
   <tr *ngIf="showHighscores"><td><app-highscore></app-highscore></td></tr>
   <tr *ngIf="showExpectation"><td><app-expectations></app-expectations></td></tr>
   <tr *ngIf="showSeasons"><td><app-seasons></app-seasons></td></tr>
+  <tr *ngIf="showGraph"><td><app-score-chart></app-score-chart></td></tr>
 </table>
 
 <table *ngIf="!apiBooted">
