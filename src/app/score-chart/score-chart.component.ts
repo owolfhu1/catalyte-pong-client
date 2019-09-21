@@ -27,7 +27,7 @@ export class ScoreChartComponent implements OnInit {
         showInLegend: true,
         markerSize: 0,
         yValueFormatString: '#,###',
-        xValueFormatString: 'MMM DD hh:mm tt'
+        xValueFormatString: 'MMM DD h:mm tt'
       });
     });
     const chart = new CanvasJS.Chart('chartContainer', {
@@ -62,7 +62,7 @@ export class ScoreChartComponent implements OnInit {
       axisYtype: 'secondary',
       markerSize: 0,
       yValueFormatString: '#,###',
-      xValueFormatString: 'MMM DD hh:mm tt',
+      xValueFormatString: 'MMM DD h:mm tt',
       name: '',
       dataPoints: []
     };
