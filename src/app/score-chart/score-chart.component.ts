@@ -21,13 +21,23 @@ export class ScoreChartComponent implements OnInit {
   renderList() {
     const data = [];
     this.dataList.forEach(obj => {
-      data.push({ ...obj, type: 'line', axisYtype: 'secondary', showInLegend: true, markerSize: 0, yValueFormatString: '#,###'});
+      data.push({ ...obj,
+        type: 'line',
+        axisYtype: 'secondary',
+        showInLegend: true,
+        markerSize: 0,
+        yValueFormatString: '#,###',
+        xValueFormatString: 'MMM DD hh:mm tt'
+      });
     });
     const chart = new CanvasJS.Chart('chartContainer', {
       animationEnabled: true,
       theme: 'light2',
       title: {
         text: 'All Scores'
+      },
+      toolTip: {
+        shared: true
       },
       axisX: {
         valueFormatString: 'MMM DD YYYY'
@@ -41,9 +51,6 @@ export class ScoreChartComponent implements OnInit {
         horizontalAlign: 'center',
         dockInsidePlotArea: true,
       },
-      toolTip: {
-        content: '<b>{name}</b> <br/> {x} <br/> new score: {y}'
-      },
       data,
     });
     chart.render();
@@ -55,6 +62,7 @@ export class ScoreChartComponent implements OnInit {
       axisYtype: 'secondary',
       markerSize: 0,
       yValueFormatString: '#,###',
+      xValueFormatString: 'MMM DD hh:mm tt',
       name: '',
       dataPoints: []
     };
@@ -77,7 +85,7 @@ export class ScoreChartComponent implements OnInit {
         includeZero: false
       },
       toolTip: {
-        content: '<b>{name}</b> <br/> {x} <br/> new score: {y}'
+        content: '{x}<br/>score: {y}'
       },
       data: [ obj ],
     });
