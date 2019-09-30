@@ -37,7 +37,15 @@ export class ScoreChartComponent implements OnInit {
         text: 'All Scores'
       },
       toolTip: {
-        shared: true
+        contentFormatter: data => {
+          const dataPoint = data.entries[0].dataPoint;
+          return `
+            <h3>${dataPoint.name}</h3>
+            <p>${dataPoint.x}</p>
+            <p>${dataPoint.game.playerOne}(${dataPoint.game.scoreOne}) vs ${dataPoint.game.playerTwo}(${dataPoint.game.scoreTwo})</p>
+            <p>old score: ${dataPoint.old}, new score: ${dataPoint.y}</p>
+          `;
+        }
       },
       axisX: {
         valueFormatString: 'MMM DD YYYY'
@@ -85,7 +93,14 @@ export class ScoreChartComponent implements OnInit {
         includeZero: false
       },
       toolTip: {
-        content: '{x}<br/>score: {y}'
+        contentFormatter: data => {
+          const dataPoint = data.entries[0].dataPoint;
+          return `
+            <p>${dataPoint.x}</p>
+            <p>${dataPoint.game.playerOne}(${dataPoint.game.scoreOne}) vs ${dataPoint.game.playerTwo}(${dataPoint.game.scoreTwo})</p>
+            <p>old score: ${dataPoint.old}, new score: ${dataPoint.y}</p>
+          `;
+        }
       },
       data: [ obj ],
     });
