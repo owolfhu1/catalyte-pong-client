@@ -36,8 +36,10 @@ export class ScoreChartComponent implements OnInit {
       title: {
         text: 'All Scores'
       },
+      zoomEnabled: true,
       toolTip: {
         contentFormatter: data => {
+          console.log(data);
           const dataPoint = data.entries[0].dataPoint;
           return `
             <h3>${dataPoint.name}</h3>
@@ -92,6 +94,7 @@ export class ScoreChartComponent implements OnInit {
       axisY: {
         includeZero: false
       },
+      zoomEnabled: true,
       toolTip: {
         contentFormatter: data => {
           const dataPoint = data.entries[0].dataPoint;
